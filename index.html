@@ -1,0 +1,29 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ESP32 Tilt</title>
+</head>
+
+<body style="font-size:40px;text-align:center;">
+
+<h2>ESP32 Eğim Canlı</h2>
+
+<div id="x">X: ...</div>
+<div id="y">Y: ...</div>
+
+<script>
+
+const url = "https://esp32-ed902-default-rtdb.firebaseio.com/egim";
+
+setInterval(async () => {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  document.getElementById("x").innerHTML = "X: " + data.x + "°";
+  document.getElementById("y").innerHTML = "Y: " + data.y + "°";
+}, 1000);
+
+</script>
+
+</body>
+</html>
