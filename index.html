@@ -8,8 +8,8 @@
 
 <h2>ESP32 Eğim Canlı</h2>
 
-<div id="x">X: ...</div>
-<div id="y">Y: ...</div>
+<div id="pitch">Pitch: ...</div>
+<div id="roll">Roll: ...</div>
 
 <script>
 
@@ -19,8 +19,9 @@ setInterval(async () => {
   const res = await fetch(url);
   const data = await res.json();
 
-  document.getElementById("x").innerHTML = "X: " + data.x + "°";
-  document.getElementById("y").innerHTML = "Y: " + data.y + "°";
+  document.getElementById("pitch").innerHTML = "Pitch: " + data.pitch + "°";
+  document.getElementById("roll").innerHTML = "Roll: " + data.roll + "°";
+
 }, 1000);
 
 </script>
