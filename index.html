@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -5,33 +6,25 @@
 </head>
 
 <body style="font-size:40px;text-align:center;">
-
 <h2>ESP32 Eğim Canlı</h2>
 
-<div id="pitch">Pitch: ...</div>
-<div id="roll">Roll: ...</div>
+<div id="x">Pitch: ...</div>
+<div id="y">Roll: ...</div>
 
 <script>
 
 const url = "https://esp32-ed902-default-rtdb.firebaseio.com/egim.json";
 
-async function update() {
-  try {
-    const res = await fetch(url + "?t=" + Date.now());
-    const data = await res.json();
+async function getData() {
+  const res = await fetch(url + "?t=" + Date.now());
+  const data = await res.json();
 
-    console.log(data); // kontrol için
-
-    document.getElementById("pitch").innerHTML = "Pitch: " + data.pitch + "°";
-    document.getElementById("roll").innerHTML = "Roll: " + data.roll + "°";
-
-  } catch (err) {
-    console.log("Hata:", err);
-  }
+  document.getElementById("x").innerHTML = "Pitch: " + data.pitch + "°";
+  document.getElementById("y").innerHTML = "Roll: " + data.roll + "°";
 }
 
-setInterval(update, 1000);
-update();
+// 🔥 daha hızlı güncelle
+setInterval(getData, 300);
 
 </script>
 
