@@ -15,14 +15,23 @@
 
 const url = "https://esp32-ed902-default-rtdb.firebaseio.com/egim.json";
 
-setInterval(async () => {
-  const res = await fetch(url);
-  const data = await res.json();
+async function update() {
+  try {
+    const res = await fetch(url + "?t=" + Date.now());
+    const data = await res.json();
 
-  document.getElementById("pitch").innerHTML = "Pitch: " + data.pitch + "°";
-  document.getElementById("roll").innerHTML = "Roll: " + data.roll + "°";
+    console.log(data); // kontrol için
 
-}, 1000);
+    document.getElementById("pitch").innerHTML = "Pitch: " + data.pitch + "°";
+    document.getElementById("roll").innerHTML = "Roll: " + data.roll + "°";
+
+  } catch (err) {
+    console.log("Hata:", err);
+  }
+}
+
+setInterval(update, 1000);
+update();
 
 </script>
 
